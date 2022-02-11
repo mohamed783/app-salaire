@@ -2,6 +2,15 @@ node{
     stage('Clone') {
         checkout scm
     }
+
+    stage('Init') {
+        sh "apk add ansible sshpass"
+        sh "rm -rf /root/.ssh"
+        sh "echo '192.168.31.138 app-salaire.mohamed.form' > /etc/hosts"
+        sh "ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa"
+        sh "sshpass -p 'Idriss2021' ssh-copy-id -o stricthostkeychecking=no root@app-salaire.mohamed.form"
+    }
+
     stage('Ansible') {
       ansiblePlaybook (
           colorized: true,          
