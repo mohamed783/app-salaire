@@ -1,0 +1,6 @@
+---
+# tasks file for mariadb
+- name: installation mariadb
+  yum: 
+   name: mariadb
+   state: present
